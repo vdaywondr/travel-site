@@ -19,7 +19,11 @@ class RevealOnScroll {
             var currentItem = this;
             new Waypoint({
                 element: currentItem,
+<<<<<<< HEAD
                 handler() {$(currentItem).addClass("reveal-item--is-visible")},
+=======
+                handler: function() {$(currentItem).addClass("reveal-item--is-visible")},
+>>>>>>> sticky-header
                 offset: that.offsetPercentage
             });
         });
