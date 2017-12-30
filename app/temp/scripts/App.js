@@ -10451,8 +10451,9 @@ var RevealOnScroll = function () {
                 new Waypoint({
                     element: currentItem,
                     handler: function handler() {
-                        return (0, _jquery2.default)(currentItem).addClass("reveal-item--is-visible");
+                        (0, _jquery2.default)(currentItem).addClass("reveal-item--is-visible");
                     },
+
                     offset: that.offsetPercentage
                 });
             });
