@@ -11270,6 +11270,7 @@ var StickyHeader = function () {
     function StickyHeader() {
         _classCallCheck(this, StickyHeader);
 
+        this.lazyImages = (0, _jquery2.default)(".lazyload");
         this.siteHeader = (0, _jquery2.default)(".site-header");
         this.headerTriggerElement = (0, _jquery2.default)(".large-hero__title");
         this.pageSections = (0, _jquery2.default)(".page-section");
@@ -11277,9 +11278,17 @@ var StickyHeader = function () {
         this.addSmoothScrolling();
         this.createHeaderWaypoint();
         this.createPageSectionWaypoint();
+        this.refreshWaypoints();
     }
 
     _createClass(StickyHeader, [{
+        key: 'refreshWaypoints',
+        value: function refreshWaypoints() {
+            this.lazyImages.on('load', function () {
+                return Waypoint.refreshAll();
+            });
+        }
+    }, {
         key: 'addSmoothScrolling',
         value: function addSmoothScrolling() {
             this.headerLinks.smoothScroll();
@@ -11291,11 +11300,14 @@ var StickyHeader = function () {
             new Waypoint({
                 element: this.headerTriggerElement[0],
                 handler: function handler(direction) {
-                    if (direction == "down") {
-                        that.siteHeader.addClass("site-header--dark");
-                    } else {
-                        that.siteHeader.removeClass("site-header--dark");
-                    }
+                    that.siteHeader.toggleClass("site-header--dark");
+                    that.headerLinks.removeClass("is-current-link");
+                    // if (direction == "down") {
+                    //     that.siteHeader.addClass("site-header--dark");
+                    // } else {
+                    //     that.siteHeader.removeClass("site-header--dark");
+                    //     that.headerLinks.removeClass("is-current-link");
+                    // }
                 }
             });
         }
